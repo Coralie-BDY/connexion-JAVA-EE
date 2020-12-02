@@ -1,0 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
+    
+    
+
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-info " >
+	<div class="container">
+   	
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/Accueil">Enchères</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        	<span class="navbar-toggler-icon"></span>
+        </button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+        	<ul class="navbar-nav">
+				<c:if test="${!empty sessionScope.thisUser}" >
+          		<li class="nav-item">
+            		<a class="nav-link" href="${pageContext.request.contextPath}/Profil" alt="Gérer mon profil" title="Gérer mon profil">
+           				 <img src="https://img.icons8.com/plasticine/40/000000/smiling.png"/>
+            			<small class="align-middle text-white">${sessionScope.thisUser.nom} ${sessionScope.thisUser.prenom}, ${sessionScope.thisUser.credit} crédit(s)</small>
+       			    </a>
+       			</li>
+				</c:if>
+			</ul>
+	
+		
+			<!-- S'il n'y a personne de connecté -->
+			<ul class="navbar-nav ml-auto">
+		   		<c:if test="${empty sessionScope.thisUser}" >
+			     <li class="nav-item">
+            		<a class="nav-link " href="${pageContext.request.contextPath}/Inscription" >S'inscrire</a>
+				 </li>
+				 <li class="nav-item">
+			          <a class="nav-link" href="${pageContext.request.contextPath}/Connexion">Se connecter</a>
+			     </li>  
+		   		</c:if>
+		    
+			<!-- S'il y a quelqu'un de connecté -->
+			
+		   		 <c:if test="${!empty sessionScope.thisUser}" >
+					<li class="nav-item">
+            			<a class="nav-link" href="${pageContext.request.contextPath}/Vente">Vendre un article</a><br/>
+			        </li>
+			        <li class="nav-item">
+            			<a class="nav-link" href="${pageContext.request.contextPath}/Profil">Mon profil</a><br/>
+			        </li>
+			        <li class="nav-item">
+            			<a class="nav-link" href="${pageContext.request.contextPath}/Historique">Historique</a><br/>
+			        </li>
+			        <li class="nav-item">
+            			<a class="nav-link" href="${pageContext.request.contextPath}/Deconnexion">Me déconnecter</a>
+			       </li>
+			       
+				  	<c:if test="${sessionScope.thisUser.administrateur}" >	
+				    <li class="nav-item">
+            			<a class="nav-link"href="#" >Administration</a> 
+            		</li>
+				   </c:if>
+				</c:if>
+        	 </ul>
+       	</div>
+       </div>
+    </nav>
+
+
